@@ -1,0 +1,80 @@
+body{
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    box-sizing: border-box;
+
+}
+
+h1{
+    font-size: larger;
+
+}
+
+p{
+    text-align: justify;
+}
+
+#highScoreWindow{
+    position: relative;
+    margin: 10px;
+    top: 0px;
+    left: 0px;
+    width: fit-content;
+    padding: 10px;
+    color: red;
+    font-weight: bold;
+}
+
+#highScoreWindow:hover{
+    cursor: pointer;
+}
+
+#questionWindow{
+    position: relative;
+    padding: 10px;
+    width: 60%;
+    top: 5%;
+    left: 20%;
+    height: auto;
+    text-align: center;
+}
+
+#resultsWindow{
+    position: relative;
+    padding: 10px;
+    width: 60%;
+    top: 5%;
+    left: 20%;
+    height: auto;
+    text-align: center;
+    align-items: center;
+
+}
+
+#btn-start{
+    background-color: red; 
+    height: auto;
+    width: 200px;
+    font-size: larger;
+    border-radius: 20px;
+    color: white;
+    padding: 10px;
+    opacity: 0.95;
+    border: 2px solid white;
+}
+
+#btn-start:hover{
+    opacity: 1;
+    border: 2px solid blue;
+    cursor: pointer;
+}
+
+#timerWindow{
+    position: absolute;
+    float: right;
+    top: 0;
+    left: 81%;
+    width: auto;
+    height: auto;
+    padding: 10px;
+    font-weight: bold;
+}
