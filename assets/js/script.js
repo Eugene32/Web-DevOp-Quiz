@@ -47,7 +47,7 @@ var QuestionList = [
     },
 
     question5 = {
-        question: "How do you remove the underline in a hyperlink display",
+        question: "How do you remove the underline in a hyperlink display?",
         choice1: "A. a {text-decoration: no_underline}",
         choice2: "B. a {text-decoration: none}",
         choice3: "C. a {text-underline: none}",
@@ -56,48 +56,48 @@ var QuestionList = [
     },
 
     question6 = {
-        question: "question 6",
-        choice1: "choice 1",
-        choice2: "choice 6",
-        choice3: "choice 3",
-        choice4: "choice 4",
-        answer: "choice 6"
+        question: "Which Of The Dialog Box Display a Message And a Data Entry Field?",
+        choice1: "A. Alert()",
+        choice2: "B. Prompt()",
+        choice3: "C. Confirm()",
+        choice4: "D. Msg()",
+        answer: "B. Prompt()"
     },
 
     question7 = {
-        question: "question 7",
-        choice1: "choice 1",
-        choice2: "choice 2",
-        choice3: "choice 7",
-        choice4: "choice 4",
-        answer: "choice 7"
+        question: "Javascript has an extension of: ___________ ",
+        choice1: "A. jscript",
+        choice2: "B. jvspt",
+        choice3: "C. scpt",
+        choice4: "D. js",
+        answer: "D. js"
     },
 
     question8 = {
-        question: "question 8",
-        choice1: "choice 8",
-        choice2: "choice 2",
-        choice3: "choice 3",
-        choice4: "choice 4",
-        answer: "choice 8"
+        question: "What do you call a function inside an object?",
+        choice1: "A. Link",
+        choice2: "B. Element",
+        choice3: "C. Method",
+        choice4: "D. Key",
+        answer: "C. Method"
     },
 
     question9 = {
-        question: "question 9",
-        choice1: "choice 1",
-        choice2: "choice 9",
-        choice3: "choice 3",
-        choice4: "choice 4",
-        answer: "choice 9"
+        question: 'Which event occurs when the user clicks on an HTML element?',
+        choice1: "A. onmouseclick",
+        choice2: "B. onclick",
+        choice3: "C. click",
+        choice4: "D. clickdown",
+        answer: "B. onclick"
     },
 
     question10 = {
-        question: "question 10",
-        choice1: "choice 1",
-        choice2: "choice 2",
-        choice3: "choice 3",
-        choice4: "choice 10",
-        answer: "choice 10"
+        question: "Which place in the HTML is the best to place the JavaScript",
+        choice1: "A. head",
+        choice2: "B. footer",
+        choice3: "C. end of body",
+        choice4: "D. start of body",
+        answer: "C. end of body"
     }
 ]
 
@@ -143,13 +143,11 @@ function displayQuestion(){
 function displayChoices() {
 
     for (var x= 1; x <= 4 ; x++){
-        choice = "choice" + x;
-        newButtonText  = chosenQuestion.choice;
         var button = document.createElement("button");
-        button.innerHTML = choice;
+        button.innerHTML = chosenQuestion["choice" + x];
         button.classList.add("btn-choices");
         WindowforChoices.appendChild(button);
-        console.log(choice);
+        
     }
  
 }
