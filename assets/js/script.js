@@ -5,8 +5,8 @@ var countdownTimer = document.getElementById("timeRemaining");
 var WindowforResult = document.getElementById("resultWindow");
 var startButton = document.getElementById("btn-start");
 var chosenQuestion = {};
-var newButton = document.createElement("BUTTON");
-var newButtonText;
+// var newButton = document.createElement("BUTTON");
+// var newButtonText;
 
 var QuestionList = [
 
@@ -22,10 +22,10 @@ var QuestionList = [
     question2 = {
         question: "Which statement inserts an image?",
         choice1: "A. Img file = 'pic.jpg'",
-        choice2: "B. Img src = pic.jpg",
+        choice2: "B. img src = pic.jpg",
         choice3: "C. Picture = pig.jpg",
-        choice4: "D. img src = 'pic.jpg'",
-        answer: "D. img src = 'pic.jpg'"
+        choice4: 'D. img src = "pic.jpg"',
+        answer: 'D. img src = "pic.jpg"'
     },
 
     question3 = {
@@ -92,7 +92,7 @@ var QuestionList = [
     },
 
     question10 = {
-        question: "Which place in the HTML is the best to place the JavaScript",
+        question: "Which place or portion in the HTML is the best to place the JavaScript",
         choice1: "A. head",
         choice2: "B. footer",
         choice3: "C. end of body",
@@ -136,6 +136,7 @@ function pickRandomQuestion(){
 
 function displayQuestion(){
     console.log("displayQuestion");
+    WindowforQuestions.classList.add("questionText");
     WindowforQuestions.innerHTML = chosenQuestion.question;
     
 }
