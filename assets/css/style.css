@@ -38,6 +38,18 @@ p{
     text-align: center;
 }
 
+#choicesWindow{
+    position: relative;
+    left: 40%;
+    top: 2%;
+    width: 20%;
+    /* border: 2px solid black; */
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-content: space-around;
+}
+
 #resultsWindow{
     position: relative;
     padding: 10px;
@@ -66,6 +78,27 @@ p{
     opacity: 1;
     border: 2px solid blue;
     cursor: pointer;
+}
+
+.btn-choices{
+    background-color: cornflowerblue;
+    color: white;
+    border-radius: 10px;
+    height: auto;
+    width: 100%;
+    align-self: left;
+    border: 2px solid darkgrey;
+    padding: 5px;
+    position: relative;
+    top: 0;
+    margin: 5px;
+    text-align: left;
+    color: white;
+}
+
+.btn-choices:hover{
+    cursor: pointer;
+
 }
 
 #timerWindow{

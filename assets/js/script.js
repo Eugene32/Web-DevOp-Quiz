@@ -5,6 +5,8 @@ var countdownTimer = document.getElementById("timeRemaining");
 var WindowforResult = document.getElementById("resultWindow");
 var startButton = document.getElementById("btn-start");
 var chosenQuestion = {};
+var newButton = document.createElement("BUTTON");
+var newButtonText;
 
 var QuestionList = [
 
@@ -128,17 +130,28 @@ function startTimer(){
 
 function pickRandomQuestion(){
     console.log("pickRandomQuestion");
-    console.log(QuestionList.length);
     chosenQuestion = QuestionList[Math.floor(Math.random(QuestionList) * QuestionList.length)];
     console.log(chosenQuestion);
 }
 
 function displayQuestion(){
     console.log("displayQuestion");
+    WindowforQuestions.innerHTML = chosenQuestion.question;
+    
 }
 
 function displayChoices() {
 
+    for (var x= 1; x <= 4 ; x++){
+        choice = "choice" + x;
+        newButtonText  = chosenQuestion.choice;
+        var button = document.createElement("button");
+        button.innerHTML = choice;
+        button.classList.add("btn-choices");
+        WindowforChoices.appendChild(button);
+        console.log(choice);
+    }
+ 
 }
 
 function checkAnswer() {
