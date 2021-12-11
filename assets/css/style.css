@@ -85,13 +85,13 @@ p{
     color: white;
     border-radius: 10px;
     height: auto;
-    width: 100%;
+    width: 75%;
     align-self: left;
     border: 2px solid darkgrey;
     padding: 5px;
     position: relative;
     top: 0;
-    margin: 5px;
+    margin: 2.5px;
     text-align: left;
     color: white;
 }

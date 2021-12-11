@@ -11,48 +11,48 @@ var newButtonText;
 var QuestionList = [
 
     question1 = {
-        question: "question 1",
-        choice1: "choice 1",
-        choice2: "choice 2",
-        choice3: "choice 3",
-        choice4: "choice 4",
-        answer: "choice 1"
+        question: "HTML stands for what?",
+        choice1: "A. Hyper-Toll Mocking Language",
+        choice2: "B. Hyperberic Token Logrithm",
+        choice3: "C. Hypothetical Markup Language",
+        choice4: "D. Hypertext Markup Language",
+        answer: "D. Hypertext Markup Language"
     },
 
     question2 = {
-        question: "question 2",
-        choice1: "choice 1",
-        choice2: "choice 2",
-        choice3: "choice 3",
-        choice4: "choice 4",
-        answer: "choice 2"
+        question: "Which statement inserts an image?",
+        choice1: "A. Img file = 'pic.jpg'",
+        choice2: "B. Img src = pic.jpg",
+        choice3: "C. Picture = pig.jpg",
+        choice4: "D. img src = 'pic.jpg'",
+        answer: "D. img src = 'pic.jpg'"
     },
 
     question3 = {
-        question: "question 3",
-        choice1: "choice 1",
-        choice2: "choice 2",
-        choice3: "choice 3",
-        choice4: "choice 4",
-        answer: "choice 3"
+        question: "Which tag should you use to make a numbered list?",
+        choice1: "A. li",
+        choice2: "B. ul",
+        choice3: "C. ol",
+        choice4: "D. ls",
+        answer: "C. ol"
     },
 
     question4 = {
-        question: "question 4",
-        choice1: "choice 1",
-        choice2: "choice 2",
-        choice3: "choice 3",
-        choice4: "choice 4",
-        answer: "choice 4"
+        question: "What does CSS stand for?",
+        choice1: "A. Cascading Style Sheets",
+        choice2: "B. Colorful Style Sheets",
+        choice3: "C. Computer Style Sheets",
+        choice4: "D. Coding Syntax System",
+        answer: "A. Cascading Style Sheets"
     },
 
     question5 = {
-        question: "question 5",
-        choice1: "choice 1",
-        choice2: "choice 5",
-        choice3: "choice 3",
-        choice4: "choice 4",
-        answer: "choice 5"
+        question: "How do you remove the underline in a hyperlink display",
+        choice1: "A. a {text-decoration: no_underline}",
+        choice2: "B. a {text-decoration: none}",
+        choice3: "C. a {text-underline: none}",
+        choice4: "D. a {underline: none}",
+        answer: "B. a {text-decoration: none}"
     },
 
     question6 = {
