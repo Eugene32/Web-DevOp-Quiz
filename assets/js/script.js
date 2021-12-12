@@ -1,13 +1,11 @@
-
 var WindowforQuestions = document.getElementById("questionWindow");
 var WindowforChoices = document.getElementById("choicesWindow");
-
-var WindowforResult = document.getElementById("resultWindow");
+var WindowforResult = document.getElementById("resultsWindow");
 var startButton = document.getElementById("btn-start");
 var chosenQuestion = {};
-
-// var newButton = document.createElement("BUTTON");
-// var newButtonText;
+var timer;
+var answeredCounter = 5;
+var timeInterval;
 
 var QuestionList = [
 
@@ -102,113 +100,155 @@ var QuestionList = [
     }
 ]
 
-document.getElementById("btn-start").addEventListener("click", function () {
-    console.log("button is working");
-    clearDisplay();
+document.getElementById("btn-start").addEventListener("click", startGame);
+
+function startGame() {
+    answeredCounter = 0;
+    timer = 20;
     startTimer();
-    pickRandomQuestion();
-    displayQuestion();
-    displayChoices();
+    document.getElementById("btn-start").removeEventListener("click", startGame);
+    refreshQuestions();
+    console.log("Finished refresh questions");
     checkAnswer();
+    console.log("Finished checking the answer questions");
     checkTimeRemaining();
-
-    
-});
-
-function clearDisplay() {
-    
-    // Remove content at the middle of the screen
-    WindowforQuestions.children[0].innerHTML = "";
-    WindowforQuestions.children[2].innerHTML = "";
-    WindowforQuestions.children[4].innerHTML = "";
-    startButton.remove();
-
+    console.log("Finished checking the time remaining");
 }
 
-var countdownTimer = document.getElementById("timeRemaining");
-var timer;
 
-function startTimer(){
+var countdownTimer = document.getElementById("timeRemaining");
+
+
+function startTimer() {
     console.log("Timer starts now.");
-    timer = 70;   
-    var timeInterval = setInterval(function(){
+
+    timeInterval = setInterval(function () {
         console.log(countdownTimer.innerHTML);
-        if (timer > -1 ){
-        countdownTimer.textContent = timer + " sec(s)";
-        timer--;
+        if (timer > -1) {
+            countdownTimer.textContent = timer + " sec(s)";
+            timer--;
         }
-        else{
+        else {
             clearInterval(timeInterval);
+            displayOptions();
         }
     }, 1000);
 }
 
 
-function pickRandomQuestion(){
+function pickRandomQuestion() {
     console.log("pickRandomQuestion");
     chosenQuestion = QuestionList[Math.floor(Math.random(QuestionList) * QuestionList.length)];
     console.log(chosenQuestion);
 }
 
-function displayQuestion(){
+function displayQuestion() {
     console.log("displayQuestion");
     WindowforQuestions.classList.add("questionText");
     WindowforQuestions.innerHTML = chosenQuestion.question;
-    
+
 }
 
 function displayChoices() {
 
-    for (var x= 1; x <= 4 ; x++){
+    for (var x = 1; x <= 4; x++) {
         var button = document.createElement("button");
         button.innerHTML = chosenQuestion["choice" + x];
         button.classList.add("btn-choices");
         WindowforChoices.appendChild(button);
-        
+
     }
- 
+
 }
 
 
-
-// var selectedAnswer;
-    
 function checkAnswer() {
-    console.log("Checking the answer");
-    
-WindowforChoices.addEventListener("click", function(event){
-    var selectedButton = event.target
-    if (selectedButton.matches(".btn-choices")){
-        console.log("An answer had been selected");
-        var selectedAnswer = selectedButton.innerHTML
-        console.log(selectedAnswer);
 
-        if (selectedAnswer != chosenQuestion.answer){
-            // timerRemaining = timerRemaining - 10;
-            console.log(chosenQuestion.answer);
-            console.log("The answer is wrong timer will be deducted");
-            timer = timer - 10;
-            countdownTimer.textContent = timer + " sec(s)";
-            if (timer < 0){
-                timer = 0;
-                countdownTimer.textContent = timer + " sec(s)";
+    WindowforChoices.addEventListener("click", function (event) {
+        var selectedButton = event.target       
+        if (selectedButton.matches(".btn-choices")) {
+            event.preventDefault();
+            var selectedAnswer = selectedButton.innerHTML
+            answeredCounter++;
+            if (answeredCounter < 5) {
+                // If the answer is wrong.
+                if (selectedAnswer != chosenQuestion.answer) {
+                    timer = timer - 10;
+                    
+                    countdownTimer.textContent = timer + " sec(s)";
+                    refreshQuestions();
+
+                    if (timer < 0) {
+
+                        timer = 0;
+                        countdownTimer.textContent = timer + " sec(s)";
+                        alert("Your score is 0.")
+                        displayOptions();
+
+                    }
+                    
+                }
+                // If the answer is correct
+                else {
+                   
+                    console.log("The answer is correct");
+                    refreshQuestions();
+                }
             }
-        }
-        else{
-            console.log("The answer is correct");
+            else {
+                alert("5 questions answered.");
+                clearInterval(timeInterval);
+                displayOptions();
+            }
 
         }
 
 
-    }
+    });
 
-});
-    
 }
 
 
 
-function checkTimeRemaining(){
+
+function displayOptions() {
+    //if (WindowforResult.childElementCount == 0) {
+        clearDisplay();
+        var startButton = document.createElement("button");
+        WindowforResult.appendChild(startButton);
+        startButton.setAttribute("id", "btn-start");
+        startButton.innerHTML = "RESTART";
+        var restartButton = document.getElementById("btn-start");
+        document.getElementById("btn-start").addEventListener("click", restartGame);
+        
+    //}
+}
+
+function restartGame (){
+    window.location.reload()
+}
+
+
+function refreshQuestions() {
+    clearDisplay();
+    pickRandomQuestion();
+    displayQuestion();
+    displayChoices();
+}
+
+function clearDisplay() {
+    while (WindowforQuestions.firstChild) {
+        WindowforQuestions.removeChild(WindowforQuestions.firstChild);
+    }
+    while (WindowforChoices.firstChild) {
+        WindowforChoices.removeChild(WindowforChoices.firstChild);
+    }
+    while (WindowforResult.firstChild) {
+        WindowforResult.removeChild(WindowforResult.firstChild);
+    }
+}
+
+function checkTimeRemaining() {
     console.log("Check time remaining");
 
 
