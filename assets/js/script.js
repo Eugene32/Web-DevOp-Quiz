@@ -1,7 +1,7 @@
 
 var WindowforQuestions = document.getElementById("questionWindow");
 var WindowforChoices = document.getElementById("choicesWindow");
-var countdownTimer = document.getElementById("timeRemaining");
+
 var WindowforResult = document.getElementById("resultWindow");
 var startButton = document.getElementById("btn-start");
 var chosenQuestion = {};
@@ -125,9 +125,24 @@ function clearDisplay() {
 
 }
 
+var countdownTimer = document.getElementById("timeRemaining");
+var timer;
+
 function startTimer(){
     console.log("Timer starts now.");
+    timer = 70;   
+    var timeInterval = setInterval(function(){
+        console.log(countdownTimer.innerHTML);
+        if (timer > -1 ){
+        countdownTimer.textContent = timer + " sec(s)";
+        timer--;
+        }
+        else{
+            clearInterval(timeInterval);
+        }
+    }, 1000);
 }
+
 
 function pickRandomQuestion(){
     console.log("pickRandomQuestion");
@@ -155,26 +170,29 @@ function displayChoices() {
 }
 
 
-var choicesContainer = document.querySelector("#choicesWindow");
-var selectedAnswer;
 
-
-
+// var selectedAnswer;
     
 function checkAnswer() {
     console.log("Checking the answer");
     
-choicesContainer.addEventListener("click", function(event){
+WindowforChoices.addEventListener("click", function(event){
     var selectedButton = event.target
     if (selectedButton.matches(".btn-choices")){
         console.log("An answer had been selected");
-        selectedAnswer = selectedButton.innerHTML
+        var selectedAnswer = selectedButton.innerHTML
         console.log(selectedAnswer);
 
         if (selectedAnswer != chosenQuestion.answer){
             // timerRemaining = timerRemaining - 10;
             console.log(chosenQuestion.answer);
             console.log("The answer is wrong timer will be deducted");
+            timer = timer - 10;
+            countdownTimer.textContent = timer + " sec(s)";
+            if (timer < 0){
+                timer = 0;
+                countdownTimer.textContent = timer + " sec(s)";
+            }
         }
         else{
             console.log("The answer is correct");
