@@ -5,6 +5,7 @@ var countdownTimer = document.getElementById("timeRemaining");
 var WindowforResult = document.getElementById("resultWindow");
 var startButton = document.getElementById("btn-start");
 var chosenQuestion = {};
+
 // var newButton = document.createElement("BUTTON");
 // var newButtonText;
 
@@ -23,7 +24,7 @@ var QuestionList = [
         question: "Which statement inserts an image?",
         choice1: "A. Img file = 'pic.jpg'",
         choice2: "B. img src = pic.jpg",
-        choice3: "C. Picture = pig.jpg",
+        choice3: "C. Picture = pic.jpg",
         choice4: 'D. img src = "pic.jpg"',
         answer: 'D. img src = "pic.jpg"'
     },
@@ -116,7 +117,7 @@ document.getElementById("btn-start").addEventListener("click", function () {
 
 function clearDisplay() {
     
-    // Remove content in the middle of the screen
+    // Remove content at the middle of the screen
     WindowforQuestions.children[0].innerHTML = "";
     WindowforQuestions.children[2].innerHTML = "";
     WindowforQuestions.children[4].innerHTML = "";
@@ -153,11 +154,32 @@ function displayChoices() {
  
 }
 
-function checkAnswer() {
 
+var choicesContainer = document.querySelector("#choicesWindow");
+var selectedAnswer;
+
+
+
+    
+function checkAnswer() {
+    console.log("Checking the answer");
+    
+choicesContainer.addEventListener("click", function(event){
+    var selectedButton = event.target
+    if (selectedButton.matches(".btn-choices")){
+        console.log("An answer had been selected");
+        selectedAnswer = selectedButton.innerHTML
+        console.log(selectedAnswer);
+    }
+
+});
+    
 }
 
 
+
 function checkTimeRemaining(){
+    console.log("Check time remaining");
+
 
 }
