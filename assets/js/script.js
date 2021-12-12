@@ -10,6 +10,7 @@ var highScoreList = [];
 var highScoreListInString = [];
 var scoreListPointer;
 
+
 var QuestionList = [
 
     question1 = {
