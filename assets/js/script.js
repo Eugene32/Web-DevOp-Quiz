@@ -170,6 +170,18 @@ choicesContainer.addEventListener("click", function(event){
         console.log("An answer had been selected");
         selectedAnswer = selectedButton.innerHTML
         console.log(selectedAnswer);
+
+        if (selectedAnswer != chosenQuestion.answer){
+            // timerRemaining = timerRemaining - 10;
+            console.log(chosenQuestion.answer);
+            console.log("The answer is wrong timer will be deducted");
+        }
+        else{
+            console.log("The answer is correct");
+
+        }
+
+
     }
 
 });
