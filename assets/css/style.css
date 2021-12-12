@@ -63,11 +63,12 @@ p{
     height: auto;
     text-align: center;
     align-items: center;
+    
 
 }
 
-#btn-start{
-    background-color: darkgreen; 
+.btn-start{
+    background-color: cornflowerblue; 
     height: auto;
     width: 200px;
     font-size: larger;
@@ -78,7 +79,7 @@ p{
     border: 2px solid white;
 }
 
-#btn-start:hover{
+.btn-start:hover{
     opacity: 1;
     border: 2px solid blue;
     cursor: pointer;

@@ -6,6 +6,9 @@ var chosenQuestion = {};
 var timer;
 var answeredCounter = 5;
 var timeInterval;
+var highScoreList = [];
+var highScoreListInString = [];
+var scoreListPointer;
 
 var QuestionList = [
 
@@ -104,7 +107,7 @@ document.getElementById("btn-start").addEventListener("click", startGame);
 
 function startGame() {
     answeredCounter = 0;
-    timer = 20;
+    timer = 2;
     startTimer();
     document.getElementById("btn-start").removeEventListener("click", startGame);
     refreshQuestions();
@@ -124,13 +127,14 @@ function startTimer() {
 
     timeInterval = setInterval(function () {
         console.log(countdownTimer.innerHTML);
-        if (timer > -1) {
-            countdownTimer.textContent = timer + " sec(s)";
+        if (timer > 0) {
             timer--;
+            countdownTimer.textContent = timer + " sec(s)";
         }
         else {
             clearInterval(timeInterval);
-            displayOptions();
+            enterHighScore ();
+           // displayOptions();
         }
     }, 1000);
 }
@@ -198,7 +202,8 @@ function checkAnswer() {
             else {
                 alert("5 questions answered.");
                 clearInterval(timeInterval);
-                displayOptions();
+                enterHighScore ();
+               // displayOptions();
             }
 
         }
@@ -209,17 +214,81 @@ function checkAnswer() {
 }
 
 
+function enterHighScore () {
+    clearDisplay();
+    WindowforQuestions.innerHTML = "All done!!!";
+
+    WindowforChoices.innerHTML = "Your score is:  " + timer;
 
 
-function displayOptions() {
+    WindowforResult.setAttribute ("style" , "flex-direction: row");
+
+    var lblInputInitials = document.createElement("label");
+    lblInputInitials.setAttribute("id", "input-label");
+    //lblInputInitials.setAttribute("sytle", "padding: 10px");
+    lblInputInitials.innerHTML = "Enter initials: "
+    lblInputInitials.setAttribute('style', 'margin-left: 10px margin-right: 10px');
+    WindowforResult.appendChild(lblInputInitials);
+    
+    var inputInitials = document.createElement("input");
+    inputInitials.setAttribute("id", "initialInput");
+    inputInitials.setAttribute("for", "initialInput")
+    inputInitials.setAttribute('type', 'text');
+    inputInitials.setAttribute('value', '');
+    inputInitials.setAttribute('style', 'margin-left: 10px margin-right: 10px');
+    WindowforResult.appendChild(inputInitials);
+    
+    
+
+    var submitButton = document.createElement("input");
+    submitButton.setAttribute("id", "submit-btn");
+    submitButton.setAttribute("type", "submit");
+    submitButton.setAttribute("value", "Submit");
+    submitButton.setAttribute('style', 'margin-left: 10px margin-right: 10px');
+    WindowforResult.appendChild(submitButton);
+    
+    var subInitBtn = document.getElementById("submit-btn");
+    document.getElementById("submit-btn").addEventListener("click", saveScore);
+    
+}
+
+function saveScore () {
+    var enteredInit = document.getElementById("initialInput").value;
+    
+    var objScore = {
+        Init: enteredInit,
+        Score: timer
+    };
+    
+    highScoreList.push(objScore);
+    console.log(highScoreList);
+    console.log("your highsocrelistin string is  " + highScoreListInString);
+    localStorage.setItem("list" , JSON.stringify(highScoreList));  
+}
+
+
+
+function displayOptions () {
     //if (WindowforResult.childElementCount == 0) {
         clearDisplay();
+        WindowforQuestions.innerHTML = "HIGH SCORES";
+
+
+
         var startButton = document.createElement("button");
         WindowforResult.appendChild(startButton);
         startButton.setAttribute("id", "btn-start");
+        startButton.setAttribute("class", "btn-start");
         startButton.innerHTML = "RESTART";
         var restartButton = document.getElementById("btn-start");
         document.getElementById("btn-start").addEventListener("click", restartGame);
+
+        var startButton = document.createElement("button");
+        WindowforResult.appendChild(startButton);
+        startButton.setAttribute("id", "btn-highscore");
+        startButton.setAttribute("class", "btn-start" );
+        startButton.innerHTML = "HIGHSCORES";
+        var restartButton = document.getElementById("btn-start");
         
     //}
 }
