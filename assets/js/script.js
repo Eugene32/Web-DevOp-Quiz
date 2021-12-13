@@ -115,7 +115,7 @@ function startGame() {
     console.log("Finished refresh questions");
     checkAnswer();
     console.log("Finished checking the answer questions");
-    checkTimeRemaining();
+    //checkTimeRemaining();
     console.log("Finished checking the time remaining");
 }
 
@@ -134,8 +134,8 @@ function startTimer() {
         }
         else {
             clearInterval(timeInterval);
-            enterHighScore ();
-           // displayOptions();
+            enterHighScore();
+            // displayOptions();
         }
     }, 1000);
 }
@@ -170,7 +170,7 @@ function displayChoices() {
 function checkAnswer() {
 
     WindowforChoices.addEventListener("click", function (event) {
-        var selectedButton = event.target       
+        var selectedButton = event.target
         if (selectedButton.matches(".btn-choices")) {
             event.preventDefault();
             var selectedAnswer = selectedButton.innerHTML
@@ -179,7 +179,7 @@ function checkAnswer() {
                 // If the answer is wrong.
                 if (selectedAnswer != chosenQuestion.answer) {
                     timer = timer - 10;
-                    
+
                     countdownTimer.textContent = timer + " sec(s)";
                     refreshQuestions();
 
@@ -191,11 +191,11 @@ function checkAnswer() {
                         displayOptions();
 
                     }
-                    
+
                 }
                 // If the answer is correct
                 else {
-                   
+
                     console.log("The answer is correct");
                     refreshQuestions();
                 }
@@ -203,8 +203,8 @@ function checkAnswer() {
             else {
                 alert("5 questions answered.");
                 clearInterval(timeInterval);
-                enterHighScore ();
-               // displayOptions();
+                enterHighScore();
+                // displayOptions();
             }
 
         }
@@ -215,14 +215,16 @@ function checkAnswer() {
 }
 
 
-function enterHighScore () {
+function enterHighScore() {
     clearDisplay();
     WindowforQuestions.innerHTML = "All done!!!";
 
     WindowforChoices.innerHTML = "Your score is:  " + timer;
+    WindowforChoices.classList.add("choicesWindow-Saving");
 
 
-    WindowforResult.setAttribute ("style" , "flex-direction: row");
+    WindowforResult.setAttribute("style", "flex-direction: row");
+    WindowforResult.classList.add("choicesWindow-Saving");
 
     var lblInputInitials = document.createElement("label");
     lblInputInitials.setAttribute("id", "input-label");
@@ -230,7 +232,7 @@ function enterHighScore () {
     lblInputInitials.innerHTML = "Enter initials: "
     lblInputInitials.setAttribute('style', 'margin-left: 10px margin-right: 10px');
     WindowforResult.appendChild(lblInputInitials);
-    
+
     var inputInitials = document.createElement("input");
     inputInitials.setAttribute("id", "initialInput");
     inputInitials.setAttribute("for", "initialInput")
@@ -238,8 +240,8 @@ function enterHighScore () {
     inputInitials.setAttribute('value', '');
     inputInitials.setAttribute('style', 'margin-left: 10px margin-right: 10px');
     WindowforResult.appendChild(inputInitials);
-    
-    
+
+
 
     var submitButton = document.createElement("input");
     submitButton.setAttribute("id", "submit-btn");
@@ -247,54 +249,82 @@ function enterHighScore () {
     submitButton.setAttribute("value", "Submit");
     submitButton.setAttribute('style', 'margin-left: 10px margin-right: 10px');
     WindowforResult.appendChild(submitButton);
-    
+
     var subInitBtn = document.getElementById("submit-btn");
     document.getElementById("submit-btn").addEventListener("click", saveScore);
-    
+
 }
 
-function saveScore () {
-    var enteredInit = document.getElementById("initialInput").value;
-    
+function saveScore() {
+    var enteredInit = (document.getElementById("initialInput").value).toUpperCase();
+
     var objScore = {
         Init: enteredInit,
         Score: timer
     };
-    
-    highScoreList.push(objScore);
-    console.log(highScoreList);
-    console.log("your highsocrelistin string is  " + highScoreListInString);
-    localStorage.setItem("list" , JSON.stringify(highScoreList));  
+
+    if (enteredInit) {
+        var tempStringList = localStorage.getItem("list");
+        if (tempStringList) {
+            highScoreList = JSON.parse(tempStringList);
+        }
+        highScoreList.push(objScore);
+        localStorage.setItem("list", JSON.stringify(highScoreList));
+        displayHighScore();
+    }
+    else {
+        alert("Please enter your initials!");
+    }
+}
+function displayHighScore() {
+    clearDisplay();
+    var tempStringList = localStorage.getItem("list");
+    if (tempStringList) {
+        highScoreList = JSON.parse(tempStringList);
+    }
+    WindowforQuestions.innerHTML = "HIGH SCORES";
+
+
+    for (x = 0; x < highScoreList.length; x++) {
+
+        var listSpan = document.createElement("span");
+        listSpan.setAttribute("style", "padding: 5px; width: 50%; margin: 2px");
+        listSpan.style.backgroundColor = "cornflowerblue";
+        listSpan.style.borderRadius = "5px";
+        listSpan.innerHTML = x + 1 + ". " + highScoreList[x].Init + " - " + highScoreList[x].Score;
+        WindowforChoices.style.textAlign = "left";
+        WindowforChoices.style.position = "relative";
+        WindowforChoices.style.left = "40%";
+        WindowforChoices.style.width = "49%";
+
+        WindowforChoices.appendChild(listSpan);
+    }
+
 }
 
-
-
-function displayOptions () {
+function displayOptions() {
     //if (WindowforResult.childElementCount == 0) {
-        clearDisplay();
-        WindowforQuestions.innerHTML = "HIGH SCORES";
+    clearDisplay();
+    WindowforQuestions.innerHTML = "HIGH SCORES";
+    var startButton = document.createElement("button");
+    WindowforResult.appendChild(startButton);
+    startButton.setAttribute("id", "btn-start");
+    startButton.setAttribute("class", "btn-start");
+    startButton.innerHTML = "RESTART";
+    var restartButton = document.getElementById("btn-start");
+    document.getElementById("btn-start").addEventListener("click", restartGame);
+
+    var startButton = document.createElement("button");
+    WindowforResult.appendChild(startButton);
+    startButton.setAttribute("id", "btn-highscore");
+    startButton.setAttribute("class", "btn-start");
+    startButton.innerHTML = "HIGHSCORES";
+    var restartButton = document.getElementById("btn-start");
 
 
-
-        var startButton = document.createElement("button");
-        WindowforResult.appendChild(startButton);
-        startButton.setAttribute("id", "btn-start");
-        startButton.setAttribute("class", "btn-start");
-        startButton.innerHTML = "RESTART";
-        var restartButton = document.getElementById("btn-start");
-        document.getElementById("btn-start").addEventListener("click", restartGame);
-
-        var startButton = document.createElement("button");
-        WindowforResult.appendChild(startButton);
-        startButton.setAttribute("id", "btn-highscore");
-        startButton.setAttribute("class", "btn-start" );
-        startButton.innerHTML = "HIGHSCORES";
-        var restartButton = document.getElementById("btn-start");
-        
-    //}
 }
-
-function restartGame (){
+//}
+function restartGame() {
     window.location.reload()
 }
 
@@ -316,10 +346,4 @@ function clearDisplay() {
     while (WindowforResult.firstChild) {
         WindowforResult.removeChild(WindowforResult.firstChild);
     }
-}
-
-function checkTimeRemaining() {
-    console.log("Check time remaining");
-
-
 }

@@ -28,7 +28,7 @@ p{
     cursor: pointer;
 }
 
-#questionWindow{
+.questionWindow{
     position: relative;
     padding: 10px;
     width: 60%;
@@ -43,7 +43,7 @@ p{
     font-weight: bolder;
 }
 
-#choicesWindow{
+.choicesWindow{
     position: relative;
     left: 35%;
     top: 2%;
@@ -52,9 +52,12 @@ p{
     display: flex;
     flex-direction: column;
     align-content: space-around;
+    
 }
 
-#resultsWindow{
+
+
+.resultsWindow{
     position: relative;
     padding: 10px;
     width: 60%;
@@ -125,4 +128,29 @@ p{
 #timeRemaining{
     padding-left: 10px;
 
+}
+
+
+.choicesWindow-Saving {
+    position: relative;
+    left: 39%;
+    top: 2%;
+    width: 30%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    padding: 10px;
+    /* align-content: space-around; */
+}
+
+.resultsWindow-Saving {
+    position: relative;
+    padding: 10px;
+    width: 30%;
+    top: 5%;
+    left: 39%;
+    height: auto;
+    text-align: left;
+    /* align-items: center; */
 }
