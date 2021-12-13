@@ -1,6 +1,7 @@
 var WindowforQuestions = document.getElementById("questionWindow");
 var WindowforChoices = document.getElementById("choicesWindow");
 var WindowforResult = document.getElementById("resultsWindow");
+var WindowforHighScore = document.getElementById("highScoreWindow")
 var startButton = document.getElementById("btn-start");
 var chosenQuestion = {};
 var timer;
@@ -9,6 +10,10 @@ var timeInterval;
 var highScoreList = [];
 var highScoreListInString = [];
 var scoreListPointer;
+
+
+
+
 
 
 var QuestionList = [
@@ -104,26 +109,35 @@ var QuestionList = [
     }
 ]
 
+// Event Listeners
+
+document.getElementById('highScoreWindow').addEventListener('click', displayHighScore);
 document.getElementById("btn-start").addEventListener("click", startGame);
 
+
+// This is the main function
+
 function startGame() {
+
+    // Disable to display of high scores immediately.
+    document.getElementById('highScoreWindow').removeEventListener('click', displayHighScore);
     answeredCounter = 0;
     timer = 40;
+    clearAllDisplay();
     startTimer();
-    document.getElementById("btn-start").removeEventListener("click", startGame);
     refreshQuestions();
     checkAnswer();
 }
 
-
+// Pointer for the value of timer remaining
 var countdownTimer = document.getElementById("timeRemaining");
 
-
+// This is the timer function
 function startTimer() {
-    console.log("Timer starts now.");
+
 
     timeInterval = setInterval(function () {
-        console.log(countdownTimer.innerHTML);
+
         if (timer > 0) {
             timer--;
             countdownTimer.textContent = timer + " sec(s)";
@@ -136,7 +150,7 @@ function startTimer() {
     }, 1000);
 }
 
-
+// Randomnly pick a question obj from the list
 function pickRandomQuestion() {
 
     var tempChosenQuestion = QuestionList[Math.floor(Math.random(QuestionList) * QuestionList.length)];
@@ -182,29 +196,31 @@ function checkAnswer() {
                 // If the answer is wrong.
                 if (selectedAnswer != chosenQuestion.answer) {
                     timer = timer - 10;
-
                     countdownTimer.textContent = timer + " sec(s)";
+                    displayResult(selectedAnswer);
                     refreshQuestions();
 
+                    // Executes when a wrong answer make the timer less than or equal to zero.
                     if (timer < 0) {
 
                         timer = 0;
                         countdownTimer.textContent = timer + " sec(s)";
                         alert("Your score is 0.")
                         displayOptions();
+                        // Enable high score display evenListener
+                        document.getElementById('highScoreWindow').addEventListener('click', displayHighScore);
 
                     }
 
                 }
                 // If the answer is correct
                 else {
-
-                    console.log("The answer is correct");
+                    displayResult(selectedAnswer);
                     refreshQuestions();
                 }
             }
             else {
-                alert("5 questions answered.");
+
                 clearInterval(timeInterval);
                 enterHighScore();
 
@@ -218,8 +234,25 @@ function checkAnswer() {
 }
 
 
+function displayResult(selectedAnswer) {
+
+    console.log(selectedAnswer);
+    if (selectedAnswer != chosenQuestion.answer) {
+        WindowforResult.innerHTML = 'The answer is INCORRECT!';
+        WindowforResult.style.color = 'red';
+        console.log("Display:  The answer is incorrect");
+    }
+    else {
+        WindowforResult.innerHTML = 'CORRECT!';
+        WindowforResult.style.color = 'green';
+        console.log("Display:  The answer is correct");
+    }
+    setTimeout (deleteResult, 1000);
+}
+
+
 function enterHighScore() {
-    clearDisplay();
+    clearAllDisplay();
     WindowforQuestions.innerHTML = "All done!!!";
 
     WindowforChoices.innerHTML = "Your score is:  " + timer;
@@ -280,7 +313,7 @@ function saveScore() {
     }
 }
 function displayHighScore() {
-    clearDisplay();
+    clearAllDisplay();
     var tempStringList = localStorage.getItem("list");
     if (tempStringList) {
         highScoreList = JSON.parse(tempStringList);
@@ -302,11 +335,11 @@ function displayHighScore() {
 
         WindowforChoices.appendChild(listSpan);
     }
-
+    displayOptions()
 }
 
 function displayOptions() {
-    clearDisplay();
+    //clearAllDisplay();
     WindowforQuestions.innerHTML = "HIGH SCORES";
     var startButton = document.createElement("button");
     WindowforResult.appendChild(startButton);
@@ -326,25 +359,40 @@ function displayOptions() {
 
 }
 
+// This reloads the page
 function restartGame() {
     window.location.reload()
 }
 
-
+// Display the first and succeeding questions
 function refreshQuestions() {
-    clearDisplay();
+    clearForNextQuestion();
     pickRandomQuestion();
     displayQuestion();
     displayChoices();
 }
 
-function clearDisplay() {
+// Functions to Delete CONTENTS OR DISPLAY - Does not delete the elements.
+
+function clearAllDisplay() {
+
+    clearForNextQuestion()
+    while (WindowforResult.firstChild) {
+        WindowforResult.removeChild(WindowforResult.firstChild);
+    }
+}
+
+function clearForNextQuestion() {
     while (WindowforQuestions.firstChild) {
         WindowforQuestions.removeChild(WindowforQuestions.firstChild);
     }
     while (WindowforChoices.firstChild) {
         WindowforChoices.removeChild(WindowforChoices.firstChild);
     }
+
+}
+
+function deleteResult () {
     while (WindowforResult.firstChild) {
         WindowforResult.removeChild(WindowforResult.firstChild);
     }
