@@ -108,15 +108,11 @@ document.getElementById("btn-start").addEventListener("click", startGame);
 
 function startGame() {
     answeredCounter = 0;
-    timer = 2;
+    timer = 40;
     startTimer();
     document.getElementById("btn-start").removeEventListener("click", startGame);
     refreshQuestions();
-    console.log("Finished refresh questions");
     checkAnswer();
-    console.log("Finished checking the answer questions");
-    //checkTimeRemaining();
-    console.log("Finished checking the time remaining");
 }
 
 
@@ -135,20 +131,27 @@ function startTimer() {
         else {
             clearInterval(timeInterval);
             enterHighScore();
-            // displayOptions();
+
         }
     }, 1000);
 }
 
 
 function pickRandomQuestion() {
-    console.log("pickRandomQuestion");
-    chosenQuestion = QuestionList[Math.floor(Math.random(QuestionList) * QuestionList.length)];
-    console.log(chosenQuestion);
+
+    var tempChosenQuestion = QuestionList[Math.floor(Math.random(QuestionList) * QuestionList.length)];
+
+    // This is to make sure that a question is not displayed twice in a row.
+    while (tempChosenQuestion == chosenQuestion) {
+        var tempChosenQuestion = QuestionList[Math.floor(Math.random(QuestionList) * QuestionList.length)];
+    }
+
+    chosenQuestion = tempChosenQuestion;
+
 }
 
 function displayQuestion() {
-    console.log("displayQuestion");
+
     WindowforQuestions.classList.add("questionText");
     WindowforQuestions.innerHTML = chosenQuestion.question;
 
@@ -204,7 +207,7 @@ function checkAnswer() {
                 alert("5 questions answered.");
                 clearInterval(timeInterval);
                 enterHighScore();
-                // displayOptions();
+
             }
 
         }
@@ -303,7 +306,6 @@ function displayHighScore() {
 }
 
 function displayOptions() {
-    //if (WindowforResult.childElementCount == 0) {
     clearDisplay();
     WindowforQuestions.innerHTML = "HIGH SCORES";
     var startButton = document.createElement("button");
@@ -323,7 +325,7 @@ function displayOptions() {
 
 
 }
-//}
+
 function restartGame() {
     window.location.reload()
 }
