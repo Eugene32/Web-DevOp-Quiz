@@ -330,7 +330,7 @@ function displayHighScore() {
         listSpan.innerHTML = x + 1 + ". " + highScoreList[x].Init + " - " + highScoreList[x].Score;
         WindowforChoices.style.textAlign = "left";
         WindowforChoices.style.position = "relative";
-        WindowforChoices.style.left = "40%";
+        WindowforChoices.style.left = "38%";
         WindowforChoices.style.width = "49%";
 
         WindowforChoices.appendChild(listSpan);
@@ -339,23 +339,27 @@ function displayHighScore() {
 }
 
 function displayOptions() {
-    //clearAllDisplay();
+
+    // Displays a title - not a sematic element of header type
     WindowforQuestions.innerHTML = "HIGH SCORES";
-    var startButton = document.createElement("button");
-    WindowforResult.appendChild(startButton);
-    startButton.setAttribute("id", "btn-start");
-    startButton.setAttribute("class", "btn-start");
-    startButton.innerHTML = "RESTART";
+    WindowforQuestions.style.fontSize = '2em';
+
+    // Creates a button for the game RESTART button
+    var btn = document.createElement("button");
+    WindowforResult.appendChild(btn);
+    btn.setAttribute("id", "btn-start");
+    btn.setAttribute("class", "btn-start");
+    btn.innerHTML = "RESTART";
     var restartButton = document.getElementById("btn-start");
     document.getElementById("btn-start").addEventListener("click", restartGame);
 
-    var startButton = document.createElement("button");
-    WindowforResult.appendChild(startButton);
-    startButton.setAttribute("id", "btn-highscore");
-    startButton.setAttribute("class", "btn-start");
-    startButton.innerHTML = "HIGHSCORES";
-    var restartButton = document.getElementById("btn-start");
-
+    // Creates a button to clear high scores record.
+    var clearBtn = document.createElement("button");
+    WindowforResult.appendChild(clearBtn);
+    clearBtn.setAttribute("id", "btn-clearHighScore");
+    clearBtn.setAttribute("class", "btn-start");
+    clearBtn.innerHTML = "CLEAR HIGHSCORES";
+    var clearButton = document.getElementById("btn-clearHighScore");
 
 }
 
