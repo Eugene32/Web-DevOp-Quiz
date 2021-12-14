@@ -9,7 +9,7 @@ This web page plays a time limited quiz game.
     * You may press 'ENTER' key when player initials/name is ready.
 * A table of high scores will be displayed after saving.
 * A zero score will not be recorded.
-* You may view the high scores without going thorugh the game.
+* You may view the high scores without going through the game.
 * You can also reset the high score list.
 * High score list is sorted in descending order.
 

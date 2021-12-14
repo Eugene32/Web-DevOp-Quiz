@@ -337,6 +337,7 @@ function clearAllDisplay() {
     document.getElementById('footer').innerHTML = '';
 }
 
+
 function clearForNextQuestion() {
     while (WindowforQuestions.firstChild) {
         WindowforQuestions.removeChild(WindowforQuestions.firstChild);

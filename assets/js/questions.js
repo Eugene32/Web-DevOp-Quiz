@@ -90,5 +90,97 @@ var QuestionList = [
         choice3: "C. end of body",
         choice4: "D. start of body",
         answer: "C. end of body"
+    },
+
+    question11 = {
+        question: "Which HTML element is the largest heading",
+        choice1: "A. heading",
+        choice2: "B. head",
+        choice3: "C. <head>",
+        choice4: "D. <h1>",
+        answer: "D. <h1>"
+    },
+
+    question12 = {
+        question: "Is used to insert a line break.",
+        choice1: "A. br",
+        choice2: "B. <break>",
+        choice3: "C. bk",
+        choice4: "D. <bk>",
+        answer: "A. br"
+    },
+
+    question13 = {
+        question: "Which is the right way to add a text color?",
+        choice1: "A. body.style.color = 'red';",
+        choice2: "B. <body style = 'color: red;'",
+        choice3: "C. <body color= 'red'",
+        choice4: "D. Both A and B",
+        answer: "D. Both A and B"
+    },
+
+    question14 = {
+        question: "What is the correct sematic element for creating a hyperlink?",
+        choice1: "A. <a> http://google.com </a>",
+        choice2: "B. <a> href://google.com </a>",
+        choice3: "C. <a href = 'http://google.com'>Google.com</a>",
+        choice4: "D. <a src = 'http://google.com'>Google.com</a>",
+        answer: "C. <a href = 'http://google.com'>Google.com</a>"
+    },
+
+    question15 = {
+        question: "Which is a table element",
+        choice1: "A. <td>",
+        choice2: "B. <br>",
+        choice3: "C. <table",
+        choice4: "D. <table>",
+        answer: "A. <td>"
+    },
+
+    question16 = {
+        question: "Which link opens a new tab in the same browser window?",
+        choice1: "A. <a href = 'url' newtab>",
+        choice2: "B. <a href = 'url' new>",
+        choice3: "C. <a href = 'url' target='_blank'>",
+        choice4: "D. <a href = 'url' newwindow>",
+        answer: "C. <a href = 'url' target='_blank'>"
+    },
+
+    question17 = {
+        question: "Which the correctparent element of li?",
+        choice1: "A. <thead>",
+        choice2: "B. <ul>",
+        choice3: "C. <tl>",
+        choice4: "D. <p.li>",
+        answer: "B. <ul>"
+    },
+
+    question18 = {
+        question: "_________________ creates a drop-down list",
+        choice1: "A. <list>",
+        choice2: "B. <d-list>",
+        choice3: "C. <select>",
+        choice4: "D. <input type = 'list'",
+        answer: "C. <select>"
+    },
+
+    question19 = {
+        question: "HTML comment start with ________ and ends with _____________.",
+        choice1: "A. <!-- ; -->",
+        choice2: "B. /*  ;  */",
+        choice3: "C. // ; //",
+        choice4: "D. && ; &&",
+        answer: "A. <!-- ; -->"
+    },
+
+    question20 = {
+        question: "Which is the multiple-line comment for CSS?",
+        choice1: "A. <!-- ; -->",
+        choice2: "B. /*  ;  */",
+        choice3: "C. // ; //",
+        choice4: "D. && ; &&",
+        answer: "B. /*  ;  */"
     }
+
+
 ]
