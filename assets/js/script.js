@@ -131,7 +131,7 @@ function checkAnswer() {
 
                 clearInterval(timeInterval);
                 countdownTimer.textContent = timer + " sec(s)";
-                document.getElementById('highScoreWindow').addEventListener('click', displayHighScore);
+                
                 enterHighScore();
 
             }
@@ -248,7 +248,7 @@ function saveScore() {
 
 // Displays the HIGH SCORES list
 function displayHighScore() {
-
+    document.getElementById('highScoreWindow').addEventListener('click', displayHighScore);
     clearAllDisplay();
     countdownTimer.innerHTML = "";
 
