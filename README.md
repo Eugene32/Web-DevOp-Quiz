@@ -22,10 +22,6 @@ Web page preview:
 
 [logo]: assets/Web-DevOps-Quiz-demo.png "Web DevOps Quiz"
 
-Web page preview:
-![alt text][logo]
-
-[logo]: https://watch.screencastify.com/v/a8jLEuFpYRggUzDPUIu4 "Web Video"
 
 
 
