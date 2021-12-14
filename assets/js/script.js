@@ -166,7 +166,7 @@ function enterHighScore() {
 
 
     WindowforResult.setAttribute("style", "flex-direction: row");
-    WindowforResult.classList.add("choicesWindow-Saving");
+    WindowforResult.classList.add("resultsWindow-Saving");
 
     var lblInputInitials = document.createElement("label");
     lblInputInitials.setAttribute("id", "input-label");
@@ -277,7 +277,7 @@ function displayOptions() {
     WindowforResult.appendChild(clearBtn);
     clearBtn.setAttribute("id", "btn-clearHighScore");
     clearBtn.setAttribute("class", "btn-start");
-    clearBtn.innerHTML = "CLEAR HIGHSCORES";
+    clearBtn.innerHTML = "CLEAR";
     var clearButton = document.getElementById("btn-clearHighScore");
     document.getElementById("btn-clearHighScore").addEventListener('click', clearHighScores);
 

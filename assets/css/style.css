@@ -134,14 +134,14 @@ p{
 .choicesWindow-Saving {
     position: relative;
     left: 39%;
-    top: 2%;
+    top: 5%;
     width: 30%;
     height: auto;
     display: flex;
     flex-direction: column;
     text-align: left;
     padding: 10px;
-    /* align-content: space-around; */
+    
 }
 
 .resultsWindow-Saving {
@@ -151,6 +151,5 @@ p{
     top: 5%;
     left: 39%;
     height: auto;
-    text-align: left;
-    /* align-items: center; */
+    text-align: left; 
 }
