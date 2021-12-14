@@ -5,11 +5,12 @@ var WindowforHighScore = document.getElementById("highScoreWindow")
 var startButton = document.getElementById("btn-start");
 var chosenQuestion = {};
 var timer;
-var answeredCounter = 5;
+var answeredCounter;
 var timeInterval;
 var highScoreList = [];
 var highScoreListInString = [];
 var scoreListPointer;
+var myEraser;
 
 
 
@@ -24,6 +25,7 @@ function startGame() {
 
     // Disable to display of high scores immediately.
     document.getElementById('highScoreWindow').removeEventListener('click', displayHighScore);
+
     answeredCounter = 0;
     timer = 40;
     clearAllDisplay();
@@ -41,14 +43,16 @@ function startTimer() {
     timeInterval = setInterval(function () {
 
         if (timer > 0) {
-            //timer--;
+
             countdownTimer.textContent = timer + " sec(s)";
             timer--;
+
         }
+
         else {
+
+            countdownTimer.textContent = timer + " sec(s)";
             clearInterval(timeInterval);
-            alert("Your score is 0.")
-            //enterHighScore();
             displayHighScore();
 
         }
@@ -111,10 +115,8 @@ function checkAnswer() {
                         timer = 0;
                         countdownTimer.textContent = timer + " sec(s)";
                         alert("Your score is 0.")
-                        displayOptions();
-                        // Enable high score display evenListener
                         document.getElementById('highScoreWindow').addEventListener('click', displayHighScore);
-
+                        displayHighScore();
                     }
 
                 }
@@ -128,6 +130,7 @@ function checkAnswer() {
 
                 clearInterval(timeInterval);
                 countdownTimer.textContent = timer + " sec(s)";
+                document.getElementById('highScoreWindow').addEventListener('click', displayHighScore);
                 enterHighScore();
 
             }
@@ -142,7 +145,7 @@ function checkAnswer() {
 
 function displayResult(selectedAnswer) {
 
-    console.log(selectedAnswer);
+
     if (selectedAnswer != chosenQuestion.answer) {
         WindowforResult.innerHTML = 'The answer is INCORRECT!';
         WindowforResult.style.color = 'red';
@@ -153,24 +156,29 @@ function displayResult(selectedAnswer) {
         WindowforResult.style.color = 'green';
         console.log("Display:  The answer is correct");
     }
-    setTimeout(deleteResult, 1000);
+
+
+    myEraser = setTimeout(deleteResultWindowContent, 1000);
+
+
+
+
 }
 
 
 function enterHighScore() {
+
     clearAllDisplay();
+
     WindowforQuestions.innerHTML = "All done!!!";
 
     WindowforChoices.innerHTML = "Your score is:  " + timer;
     WindowforChoices.classList.add("choicesWindow-Saving");
-
-
     WindowforResult.setAttribute("style", "flex-direction: row");
-    WindowforResult.classList.add("resultsWindow-Saving");
 
+    WindowforResult.classList.add("resultsWindow-Saving");
     var lblInputInitials = document.createElement("label");
     lblInputInitials.setAttribute("id", "input-label");
-    //lblInputInitials.setAttribute("sytle", "padding: 10px");
     lblInputInitials.innerHTML = "Enter initials: "
     lblInputInitials.setAttribute('style', 'margin-left: 10px margin-right: 10px');
     WindowforResult.appendChild(lblInputInitials);
@@ -183,8 +191,6 @@ function enterHighScore() {
     inputInitials.setAttribute('style', 'margin-left: 10px margin-right: 10px');
     WindowforResult.appendChild(inputInitials);
 
-
-
     var submitButton = document.createElement("input");
     submitButton.setAttribute("id", "submit-btn");
     submitButton.setAttribute("type", "submit");
@@ -194,6 +200,7 @@ function enterHighScore() {
 
     var subInitBtn = document.getElementById("submit-btn");
     document.getElementById("submit-btn").addEventListener("click", saveScore);
+
 
 }
 
@@ -229,6 +236,7 @@ function saveScore() {
 function displayHighScore() {
 
     clearAllDisplay();
+    countdownTimer.innerHTML = "";
 
     if (localStorage.length) {
         var tempStringList = localStorage.getItem("list");
@@ -322,8 +330,11 @@ function clearForNextQuestion() {
 
 }
 
-function deleteResult() {
-    while (WindowforResult.firstChild) {
-        WindowforResult.removeChild(WindowforResult.firstChild);
+function deleteResultWindowContent() {
+
+    if (answeredCounter < 5 && timer != 0) {     // Condition prevents unexpected deletion.
+        while (WindowforResult.firstChild) {
+            WindowforResult.removeChild(WindowforResult.firstChild);
+        }
     }
 }
