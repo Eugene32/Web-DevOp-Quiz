@@ -14,10 +14,13 @@ var myEraser;
 
 
 
-// Event Listeners
+// Event Listeners on click
 
 document.getElementById('highScoreWindow').addEventListener('click', displayHighScore);
 document.getElementById("btn-start").addEventListener("click", startGame);
+
+// Add event listener on keypress
+document.addEventListener('keypress', (event) => { var keyName = event.key; var keyCode = event.code; }, false);
 
 
 // This is the main function
@@ -170,6 +173,9 @@ function enterHighScore() {
 
     clearAllDisplay();
 
+    // Add event listener on keypress
+    document.addEventListener('keypress', (event) => { var keyName = event.key; var keyCode = event.code; }, false);
+
     WindowforQuestions.innerHTML = "All done!!!";
 
     WindowforChoices.innerHTML = "Your score is:  " + timer;
@@ -199,12 +205,29 @@ function enterHighScore() {
     WindowforResult.appendChild(submitButton);
 
     var subInitBtn = document.getElementById("submit-btn");
+
+    // Add event listener on click
     document.getElementById("submit-btn").addEventListener("click", saveScore);
+    
+    // Add event listener on keypress for Enter 
+    document.addEventListener('keypress', (event) => { 
+        var keyName = event.key; 
+      
+        if(keyName == 'Enter'){
+            saveScore();
+        }
+    
+    }, false);
 
 
+    
 }
 
 function saveScore() {
+
+    // Disable event listeners for keyboard entry
+    document.removeEventListener('keypress', () => {}, false);
+
     var enteredInit = (document.getElementById("initialInput").value).toUpperCase();
 
     var objScore = {
@@ -238,15 +261,13 @@ function displayHighScore() {
     clearAllDisplay();
     countdownTimer.innerHTML = "";
 
-    if (localStorage.length) {
+    if (localStorage.length) { // Test is the localStorage is empty or not.
         var tempStringList = localStorage.getItem("list");
+        highScoreList = JSON.parse(tempStringList);
 
-        if (tempStringList) {
-            highScoreList = JSON.parse(tempStringList);
-
-        }
         WindowforQuestions.innerHTML = "HIGH SCORES";
 
+        // Creates the list in accordance to content
         for (x = 0; x < highScoreList.length; x++) {
 
             var listSpan = document.createElement("span");
@@ -258,11 +279,12 @@ function displayHighScore() {
             WindowforChoices.style.position = "relative";
             WindowforChoices.style.left = "37.5%";
             WindowforChoices.style.width = "50%";
-
             WindowforChoices.appendChild(listSpan);
         }
     }
+
     displayOptions()
+
 }
 
 function displayOptions() {
@@ -278,7 +300,8 @@ function displayOptions() {
     btn.setAttribute("class", "btn-start");
     btn.innerHTML = "RESTART";
     var restartButton = document.getElementById("btn-start");
-    document.getElementById("btn-start").addEventListener("click", restartGame);
+    //document.getElementById("btn-start").addEventListener("click", restartGame);
+    restartButton.addEventListener("click", restartGame);
 
     // Creates a button to clear high scores record.
     var clearBtn = document.createElement("button");
@@ -287,8 +310,8 @@ function displayOptions() {
     clearBtn.setAttribute("class", "btn-start");
     clearBtn.innerHTML = "CLEAR";
     var clearButton = document.getElementById("btn-clearHighScore");
-    document.getElementById("btn-clearHighScore").addEventListener('click', clearHighScores);
-
+    //document.getElementById("btn-clearHighScore").addEventListener('click', clearHighScores);
+    clearButton.addEventListener('click', clearHighScores);
 }
 
 function clearHighScores() {
