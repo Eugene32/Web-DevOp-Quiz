@@ -334,6 +334,7 @@ function clearAllDisplay() {
     while (WindowforResult.firstChild) {
         WindowforResult.removeChild(WindowforResult.firstChild);
     }
+    document.getElementById('footer').innerHTML = '';
 }
 
 function clearForNextQuestion() {

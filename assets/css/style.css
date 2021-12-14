@@ -153,3 +153,14 @@ p{
     height: auto;
     text-align: left; 
 }
+
+footer{
+    position: relative;
+    top: 100%;
+    left: 25%;
+    align-items: center;
+    text-align: center;
+    width: 50%;
+    height: auto;
+    padding-bottom: 20px;
+}
