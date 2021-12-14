@@ -25,7 +25,7 @@ Web page preview:
 Web page preview:
 ![alt text][logo]
 
-[logo]: https://watch.screencastify.com/v/a8jLEuFpYRggUzDPUIu4 "Web DevOps Quiz"
+[logo]: https://watch.screencastify.com/v/a8jLEuFpYRggUzDPUIu4 "Web Video"
 
 
 
