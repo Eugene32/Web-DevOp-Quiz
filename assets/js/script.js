@@ -20,7 +20,6 @@ document.getElementById("btn-start").addEventListener("click", startGame);
 
 
 // This is the main function
-
 function startGame() {
 
     // Disable to display of high scores immediately.
@@ -39,16 +38,18 @@ var countdownTimer = document.getElementById("timeRemaining");
 // This is the timer function
 function startTimer() {
 
-
     timeInterval = setInterval(function () {
 
         if (timer > 0) {
-            timer--;
+            //timer--;
             countdownTimer.textContent = timer + " sec(s)";
+            timer--;
         }
         else {
             clearInterval(timeInterval);
-            enterHighScore();
+            alert("Your score is 0.")
+            //enterHighScore();
+            displayHighScore();
 
         }
     }, 1000);
@@ -62,8 +63,8 @@ function pickRandomQuestion() {
     // This is to make sure that a question is not displayed twice in a row.
     while (tempChosenQuestion == chosenQuestion) {
         var tempChosenQuestion = QuestionList[Math.floor(Math.random(QuestionList) * QuestionList.length)];
-    }
 
+    }
     chosenQuestion = tempChosenQuestion;
 
 }
@@ -126,6 +127,7 @@ function checkAnswer() {
             else {
 
                 clearInterval(timeInterval);
+                countdownTimer.textContent = timer + " sec(s)";
                 enterHighScore();
 
             }
@@ -211,7 +213,7 @@ function saveScore() {
         highScoreList.push(objScore);
 
         //Sorting the high scores from highest to lowest
-        highScoreList.sort((a, b) => {return b.Score - a.Score;});
+        highScoreList.sort((a, b) => { return b.Score - a.Score; });
 
         // Saving a string file into the local storage
         localStorage.setItem("list", JSON.stringify(highScoreList));
@@ -225,27 +227,32 @@ function saveScore() {
 
 
 function displayHighScore() {
+
     clearAllDisplay();
-    var tempStringList = localStorage.getItem("list");
-    if (tempStringList) {
-        highScoreList = JSON.parse(tempStringList);
-    }
-    WindowforQuestions.innerHTML = "HIGH SCORES";
 
+    if (localStorage.length) {
+        var tempStringList = localStorage.getItem("list");
 
-    for (x = 0; x < highScoreList.length; x++) {
+        if (tempStringList) {
+            highScoreList = JSON.parse(tempStringList);
 
-        var listSpan = document.createElement("span");
-        listSpan.setAttribute("style", "padding: 5px; width: 50%; margin: 2px");
-        listSpan.style.backgroundColor = "cornflowerblue";
-        listSpan.style.borderRadius = "5px";
-        listSpan.innerHTML = x + 1 + ". " + highScoreList[x].Init + " - " + highScoreList[x].Score;
-        WindowforChoices.style.textAlign = "left";
-        WindowforChoices.style.position = "relative";
-        WindowforChoices.style.left = "37.5%";
-        WindowforChoices.style.width = "50%";
+        }
+        WindowforQuestions.innerHTML = "HIGH SCORES";
 
-        WindowforChoices.appendChild(listSpan);
+        for (x = 0; x < highScoreList.length; x++) {
+
+            var listSpan = document.createElement("span");
+            listSpan.setAttribute("style", "padding: 5px; width: 50%; margin: 2px");
+            listSpan.style.backgroundColor = "cornflowerblue";
+            listSpan.style.borderRadius = "5px";
+            listSpan.innerHTML = x + 1 + ". " + highScoreList[x].Init + " - " + highScoreList[x].Score;
+            WindowforChoices.style.textAlign = "left";
+            WindowforChoices.style.position = "relative";
+            WindowforChoices.style.left = "37.5%";
+            WindowforChoices.style.width = "50%";
+
+            WindowforChoices.appendChild(listSpan);
+        }
     }
     displayOptions()
 }
@@ -278,7 +285,7 @@ function displayOptions() {
 
 function clearHighScores() {
     localStorage.clear();
-    displayHighScore()
+    displayHighScore();
 
 }
 
