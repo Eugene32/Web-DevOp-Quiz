@@ -19,9 +19,6 @@ var myEraser;
 document.getElementById('highScoreWindow').addEventListener('click', displayHighScore);
 document.getElementById("btn-start").addEventListener("click", startGame);
 
-// Add event listener on keypress
-document.addEventListener('keypress', (event) => { var keyName = event.key; var keyCode = event.code; }, false);
-
 
 // This is the main function
 function startGame() {
@@ -72,6 +69,7 @@ function pickRandomQuestion() {
         var tempChosenQuestion = QuestionList[Math.floor(Math.random(QuestionList) * QuestionList.length)];
 
     }
+
     chosenQuestion = tempChosenQuestion;
 
 }
@@ -145,27 +143,22 @@ function checkAnswer() {
 
 }
 
-
+// Display a prompt on screen if answer is right or wrong.
 function displayResult(selectedAnswer) {
 
 
-    if (selectedAnswer != chosenQuestion.answer) {
+    if (selectedAnswer != chosenQuestion.answer) {          // Display:  Says answer is correct
         WindowforResult.innerHTML = 'The answer is INCORRECT!';
         WindowforResult.style.color = 'red';
         console.log("Display:  The answer is incorrect");
     }
-    else {
+    else {                                                  // Display:  Says answer is correct
         WindowforResult.innerHTML = 'CORRECT!';
         WindowforResult.style.color = 'green';
         console.log("Display:  The answer is correct");
     }
 
-
-    myEraser = setTimeout(deleteResultWindowContent, 1000);
-
-
-
-
+    myEraser = setTimeout(deleteResultWindowContent, 1000);    // Erases the result after 1 sec.
 }
 
 
@@ -204,37 +197,35 @@ function enterHighScore() {
     submitButton.setAttribute('style', 'margin-left: 10px margin-right: 10px');
     WindowforResult.appendChild(submitButton);
 
-    var subInitBtn = document.getElementById("submit-btn");
-
-    // Add event listener on click
+    // Add event listener on click for Submit button
     document.getElementById("submit-btn").addEventListener("click", saveScore);
-    
+
     // Add event listener on keypress for Enter 
-    document.addEventListener('keypress', (event) => { 
-        var keyName = event.key; 
-      
-        if(keyName == 'Enter'){
+    document.addEventListener('keypress', (event) => {
+        var keyName = event.key;
+
+        if (keyName == 'Enter') {
             saveScore();
         }
-    
+
     }, false);
-
-
-    
 }
 
 function saveScore() {
 
     // Disable event listeners for keyboard entry
-    document.removeEventListener('keypress', () => {}, false);
+    document.removeEventListener('keypress', () => { }, false);
 
+    // Converts initial to uppercase letters.
     var enteredInit = (document.getElementById("initialInput").value).toUpperCase();
 
+    // Prepares a container for player initials/name and score
     var objScore = {
         Init: enteredInit,
         Score: timer
     };
 
+    // Save the entry if the input box is not empty
     if (enteredInit) {
         var tempStringList = localStorage.getItem("list");
         if (tempStringList) {
@@ -250,18 +241,18 @@ function saveScore() {
         displayHighScore();
     }
     else {
-        // Prompt as the input is blank
+        // Prompt: Input is blank
         alert("Please enter your initials!");
     }
 }
 
-
+// Displays the HIGH SCORES list
 function displayHighScore() {
 
     clearAllDisplay();
     countdownTimer.innerHTML = "";
 
-    if (localStorage.length) { // Test is the localStorage is empty or not.
+    if (localStorage.length) { // Tests if the localStorage is empty or not.
         var tempStringList = localStorage.getItem("list");
         highScoreList = JSON.parse(tempStringList);
 
@@ -283,10 +274,12 @@ function displayHighScore() {
         }
     }
 
-    displayOptions()
+    displayOptions()    // This will display buttons to restart or clear high scores.
 
 }
 
+
+// This will display buttons to restart or clear high scores.
 function displayOptions() {
 
     // Displays a title - not a sematic element of header type
@@ -314,13 +307,14 @@ function displayOptions() {
     clearButton.addEventListener('click', clearHighScores);
 }
 
+// Clears the High Score localStorage and displays the updated list
 function clearHighScores() {
     localStorage.clear();
     displayHighScore();
 
 }
 
-// This reloads the page
+// This reloads the page if restart button is chose.
 function restartGame() {
     window.location.reload()
 }
@@ -334,7 +328,6 @@ function refreshQuestions() {
 }
 
 // Functions to Delete CONTENTS OR DISPLAY - Does not delete the elements.
-
 function clearAllDisplay() {
 
     clearForNextQuestion()
