@@ -20,7 +20,7 @@ Web page video --> [Quiz video](https://watch.screencastify.com/v/a8jLEuFpYRggUz
 Web page preview:
 ![alt text][logo]
 
-[logo]: assets/Web DevOps Quiz demo.png "Web DevOps Quiz"
+[logo]: assets/Web-DevOps-Quiz-demo.png "Web DevOps Quiz"
 
 
 
