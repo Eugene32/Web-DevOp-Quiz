@@ -123,9 +123,9 @@ var QuestionList = [
         question: "What is the correct sematic element for creating a hyperlink?",
         choice1: "A. a http://google.com /a",
         choice2: "B. a href://google.com </a>",
-        choice3: "C. a href = http://google.com>Google.com a",
+        choice3: "C. a href = http://google.com Google.com  a",
         choice4: "D. a src = http://google.com>Google.com a",
-        answer: "C. a href = http://google.com>Google.com a"
+        answer: "C. a href = http://google.com Google.com  a"
     },
 
     question15 = {

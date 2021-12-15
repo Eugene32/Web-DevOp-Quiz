@@ -43,14 +43,14 @@ function startTimer() {
     timeInterval = setInterval(function () {
 
         if (timer > 0) {
-
+            // display the decrement every second
             countdownTimer.textContent = timer + " sec(s)";
             timer--;
 
         }
 
         else {
-
+            //stop the setInteval function once the timer runs out.
             countdownTimer.textContent = timer + " sec(s)";
             clearInterval(timeInterval);
             displayHighScore();
@@ -112,12 +112,17 @@ function checkAnswer() {
 
                     // Executes when a wrong answer make the timer less than or equal to zero.
                     if (timer < 0) {
-
+                        
                         timer = 0;
                         countdownTimer.textContent = timer + " sec(s)";
+
+                        clearInterval(timeInterval);   //TURN INTO A COMMENT IF ZERO SCORE ARE NOT TO BE RECORD
+                        enterHighScore();              //TURN INTO A COMMENT IF ZERO SCORE ARE NOT TO BE RECORD
+
+                        /*        REMOVE COMMENT TAGS IF ZERO SCORES ARE NOT TO BE RECORD
                         alert("Your score is 0.")
                         document.getElementById('highScoreWindow').addEventListener('click', displayHighScore);
-                        displayHighScore();
+                        displayHighScore(); */
                     }
 
                 }
@@ -169,12 +174,15 @@ function enterHighScore() {
     // Add event listener on keypress
     document.addEventListener('keypress', (event) => { var keyName = event.key; var keyCode = event.code; }, false);
 
+    //Display message All Done!!!
     WindowforQuestions.innerHTML = "All done!!!";
 
+    // Displaying the score
     WindowforChoices.innerHTML = "Your score is:  " + timer;
     WindowforChoices.classList.add("choicesWindow-Saving");
     WindowforResult.setAttribute("style", "flex-direction: row");
 
+    // Make the input box label
     WindowforResult.classList.add("resultsWindow-Saving");
     var lblInputInitials = document.createElement("label");
     lblInputInitials.setAttribute("id", "input-label");
@@ -182,6 +190,7 @@ function enterHighScore() {
     lblInputInitials.setAttribute('style', 'margin-left: 10px margin-right: 10px');
     WindowforResult.appendChild(lblInputInitials);
 
+    // Make the input box
     var inputInitials = document.createElement("input");
     inputInitials.setAttribute("id", "initialInput");
     inputInitials.setAttribute("for", "initialInput")
@@ -190,6 +199,7 @@ function enterHighScore() {
     inputInitials.setAttribute('style', 'margin-left: 10px margin-right: 10px');
     WindowforResult.appendChild(inputInitials);
 
+    // Create the submit button
     var submitButton = document.createElement("input");
     submitButton.setAttribute("id", "submit-btn");
     submitButton.setAttribute("type", "submit");
@@ -268,7 +278,9 @@ function displayHighScore() {
             listSpan.innerHTML = x + 1 + ". " + highScoreList[x].Init + " - " + highScoreList[x].Score;
             WindowforChoices.style.textAlign = "left";
             WindowforChoices.style.position = "relative";
-            WindowforChoices.style.left = "37.5%";
+            WindowforChoices.style.display = "flex";
+            WindowforChoices.style.alignItems = "center";
+            WindowforChoices.style.left = "25%";
             WindowforChoices.style.width = "50%";
             WindowforChoices.appendChild(listSpan);
         }
@@ -337,7 +349,7 @@ function clearAllDisplay() {
     document.getElementById('footer').innerHTML = '';
 }
 
-
+// Clearing display for the next question (#questionWindow and #choicesWindow).
 function clearForNextQuestion() {
     while (WindowforQuestions.firstChild) {
         WindowforQuestions.removeChild(WindowforQuestions.firstChild);
@@ -348,6 +360,7 @@ function clearForNextQuestion() {
 
 }
 
+// Clear content for #resultsWindow
 function deleteResultWindowContent() {
 
     if (answeredCounter < 5 && timer != 0) {     // Condition prevents unexpected deletion.
