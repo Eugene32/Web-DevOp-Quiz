@@ -8,10 +8,11 @@ This web page plays a time limited quiz game.
 * After finishing the game you will be prompted to save your score.
     * You may press 'ENTER' key when player initials/name is ready.
 * A table of high scores will be displayed after saving.
-* A zero score will not be recorded.
+* A zero score will be recorded.
+* High score list is sorted in descending order.
 * You may view the high scores without going through the game.
 * You can also reset the high score list.
-* High score list is sorted in descending order.
+
 
 Web page link --> [Web DevOp Quiz](https://eugene32.github.io/Web-DevOp-Quiz/)
 
