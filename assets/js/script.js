@@ -237,11 +237,15 @@ function saveScore() {
 
     // Save the entry if the input box is not empty
     if (enteredInit) {
+
+        // Retrieving the local storage data
         var tempStringList = localStorage.getItem("list");
+        // If the local storage is not empty then update highScoreList
         if (tempStringList) {
             highScoreList = JSON.parse(tempStringList);
         }
-        highScoreList.push(objScore);
+
+        highScoreList.push(objScore);  // Adding the new highscore unto the high score list
 
         //Sorting the high scores from highest to lowest
         highScoreList.sort((a, b) => { return b.Score - a.Score; });
@@ -258,8 +262,9 @@ function saveScore() {
 
 // Displays the HIGH SCORES list
 function displayHighScore() {
+
     document.getElementById('highScoreWindow').addEventListener('click', displayHighScore);
-    clearAllDisplay();
+    clearAllDisplay();   
     countdownTimer.innerHTML = "";
 
     if (localStorage.length) { // Tests if the localStorage is empty or not.
@@ -268,7 +273,7 @@ function displayHighScore() {
 
         WindowforQuestions.innerHTML = "HIGH SCORES";
 
-        // Creates the list in accordance to content
+        // Creates the list in accordance to content of local storage of HIGH SCORES
         for (x = 0; x < highScoreList.length; x++) {
 
             var listSpan = document.createElement("span");
@@ -286,7 +291,7 @@ function displayHighScore() {
         }
     }
 
-    displayOptions()    // This will display buttons to restart or clear high scores.
+    displayOptions()    // This will display buttons to RESTART or CLEAR high scores.
 
 }
 
