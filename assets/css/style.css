@@ -109,8 +109,6 @@ p{
     cursor: pointer;
     color: white;
     background-color: cornflowerblue;
-
-
 }
 
 #timerWindow{
@@ -154,7 +152,8 @@ p{
     text-align: left; 
 }
 
-footer{
+
+.footer{
     position: relative;
     top: 100%;
     left: 25%;
@@ -162,5 +161,6 @@ footer{
     text-align: center;
     width: 50%;
     height: auto;
+    padding-top: 20px;
     padding-bottom: 20px;
-}
+  }

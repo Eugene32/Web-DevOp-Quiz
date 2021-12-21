@@ -155,12 +155,12 @@ function displayResult(selectedAnswer) {
     if (selectedAnswer != chosenQuestion.answer) {          // Display:  Says answer is correct
         WindowforResult.innerHTML = 'The answer is INCORRECT!';
         WindowforResult.style.color = 'red';
-        console.log("Display:  The answer is incorrect");
+        
     }
     else {                                                  // Display:  Says answer is correct
         WindowforResult.innerHTML = 'CORRECT!';
         WindowforResult.style.color = 'green';
-        console.log("Display:  The answer is correct");
+        
     }
 
     myEraser = setTimeout(deleteResultWindowContent, 1000);    // Erases the result after 1 sec.
