@@ -13,6 +13,9 @@ This web page plays a time limited quiz game.
 * You may view the high scores without going through the game.
 * You can also reset the high score list.
 
+Technologies used:
+* CSS
+* javascript
 
 Web page link --> [Web DevOp Quiz](https://eugene32.github.io/Web-DevOp-Quiz/)
 
